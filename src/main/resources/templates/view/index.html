@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User list</title>
+    <style>
+        .buttonToLink {
+            background: none;
+            border: none;
+            color: red
+        }
+
+        .buttonToLink:hover {
+            background: none;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>User list</h1>
+
+<a href="/users/create">Create user</a>
+<br/>
+<br/>
+
+<div th:if="${userList.isEmpty()}">
+    <div>No data</div>
+</div>
+
+<div th:if="${!userList.isEmpty()}">
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>-</th>
+            <th>-</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${userList}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+            <td><a th:href="@{/users/update/{id}(id=${user.id})}">update</a></td>
+            <td>
+                <form th:action="@{/users/remove/{id}(id=${user.id})}" th:method="post">
+                    <button class="buttonToLink" type="submit">remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

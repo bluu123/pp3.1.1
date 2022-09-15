@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.id == null} ? 'User create' : 'User update'"></title>
+</head>
+<body>
+
+<div th:if="${user.id == null}">
+    <h1>User create</h1>
+    <form method="post" th:Object="${user}" th:action="@{/users/create}">
+        <div>
+            <label>Name:</label>
+            <input th:field="*{name}" type="text"/>
+        </div>
+        <div>
+            <label>Last name:</label>
+            <input th:field="*{lastName}" type="text"/>
+        </div>
+        <div>
+            <label>Middle name:</label>
+            <input th:field="*{email}" type="text"/>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<div th:if="${user.id != null}">
+    <h1>User update</h1>
+    <form method="post" th:Object="${user}" th:action="@{/users/update}">
+        <div>
+            <label>Name:</label>
+            <input th:field="*{name}" type="text"/>
+        </div>
+        <div>
+            <label>Last name:</label>
+            <input th:field="*{lastName}" type="text"/>
+        </div>
+        <div>
+            <label>Middle name:</label>
+            <input th:field="*{email}" type="text"/>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+</body>
+</html>
